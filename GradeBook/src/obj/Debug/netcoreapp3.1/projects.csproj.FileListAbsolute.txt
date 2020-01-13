@@ -1,0 +1,11 @@
+c:\projects\GradeBook\src\bin\Debug\netcoreapp3.1\projects.exe
+C:\projects\GradeBook\src\bin\Debug\netcoreapp3.1\projects.deps.json
+C:\projects\GradeBook\src\bin\Debug\netcoreapp3.1\projects.runtimeconfig.json
+C:\projects\GradeBook\src\bin\Debug\netcoreapp3.1\projects.runtimeconfig.dev.json
+c:\projects\GradeBook\src\bin\Debug\netcoreapp3.1\projects.dll
+c:\projects\GradeBook\src\bin\Debug\netcoreapp3.1\projects.pdb
+c:\projects\GradeBook\src\obj\Debug\netcoreapp3.1\projects.csprojAssemblyReference.cache
+c:\projects\GradeBook\src\obj\Debug\netcoreapp3.1\projects.AssemblyInfoInputs.cache
+c:\projects\GradeBook\src\obj\Debug\netcoreapp3.1\projects.AssemblyInfo.cs
+c:\projects\GradeBook\src\obj\Debug\netcoreapp3.1\projects.dll
+c:\projects\GradeBook\src\obj\Debug\netcoreapp3.1\projects.pdb
