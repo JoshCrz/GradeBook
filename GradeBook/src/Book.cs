@@ -3,6 +3,9 @@ using System.Collections.Generic;
 
 namespace GradeBook
 {
+
+    public delegate void GradeAddedDelegate(object sender, EventArgs args);
+
     public class Book
     {
         //public is an access modifier, it means whether or not the field definition(var) or Method can be accessed from outside the Class
@@ -21,14 +24,19 @@ namespace GradeBook
         public void AddGrade(double grade)
         {
                 
-            if(grade <= 100 && grade >= 0){
-                if(grade >= 0){
+            if(grade <= 100 && grade >= 0){                
                     this.grades.Add(grade);   
-                }                
+                    if(GradeAdded != null)
+                    {
+                        GradeAdded(this, new EventArgs());
+                    }
             } else {
                 throw new ArgumentException($"Invalid {nameof(grade)}");   //exception must be caught, otherwise program will crash       
             }
         }
+
+
+        public event GradeAddedDelegate GradeAdded;
 
 
         public void ShowStatistics(){
@@ -96,6 +104,12 @@ namespace GradeBook
          //public string Name;
 
 
+        public string NewName {
+            //auto property
+            get; 
+            set;
+            //private set;
+        }
 
          public string Name
          {
@@ -116,6 +130,14 @@ namespace GradeBook
          
         //backing field 
         private string name;    
+
+
+        //readonly can only be changed when initialised (ie, in a constructor)
+        readonly string category = "Science";
+
+        //const - cannot change the value of the const.
+        //many devs will uppercase const's
+        const string CATEGORYTWO = "Physics";
 
     }
 }
