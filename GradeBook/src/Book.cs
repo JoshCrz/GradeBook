@@ -20,12 +20,13 @@ namespace GradeBook
 
         public void AddGrade(double grade)
         {
-            if(grade <= 100 || grade >= 0){
+                
+            if(grade <= 100 && grade >= 0){
                 if(grade >= 0){
                     this.grades.Add(grade);   
                 }                
             } else {
-                System.Console.WriteLine("Invalid value");
+                throw new ArgumentException($"Invalid {nameof(grade)}");   //exception must be caught, otherwise program will crash       
             }
         }
 
@@ -45,10 +46,11 @@ namespace GradeBook
             stats.Low = this.GetLowest(this.grades);
             stats.High = this.GetHighest(this.grades);
             
-            
+            return stats;
+
             //for loop
             
-            //return stats;
+            
 
             /*
             code from the video, using a do,while            
