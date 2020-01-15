@@ -93,7 +93,29 @@ namespace GradeBook
         //code cannot access this private field definition as it's private, it's local only to Book Class
 
          private List<double> grades;
-         public string Name;
+         //public string Name;
+
+
+
+         public string Name
+         {
+             get
+             {//this code runs if someone wants to read the name property
+                return name;
+             }
+             set 
+             {//value is implicit variable, it will always be there, it will represent what the value is that someone is trying to write into property
+                if(!String.IsNullOrEmpty(value)){
+                name = value;    
+                } else {
+                    //user is trying to set null or empty string as my value
+                }
+                
+             }
+         }
+         
+        //backing field 
+        private string name;    
 
     }
 }
