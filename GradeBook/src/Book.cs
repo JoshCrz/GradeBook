@@ -6,13 +6,69 @@ namespace GradeBook
 
     public delegate void GradeAddedDelegate(object sender, EventArgs args);
 
-    public class Book
+
+    public class DiskBook : Book
+    {
+        public DiskBook(string name) : base(name)
+        {
+
+        }
+    }
+
+    //deriving from a base class
+    public class NamedObject {        
+
+        //constructor
+        //base() is accessing the constructor of the parent class
+        public NamedObject(string name){
+            Name = name;
+        }
+
+        public string Name {
+            get;
+            set;
+        }
+    }
+
+
+    //convention of type interface, should begin with uppercase 'I'
+    public interface IBook 
+    {        
+        void AddGrade(double grade);
+        Statistics GetStatistics();
+        string Name { get; }
+        event GradeAddedDelegate GradeAdded;
+    }
+
+    //abstract class
+    public abstract class Book : NamedObject, IBook
+    {        
+        //use the constructor's parameter and forward that to the base class constructor
+        public Book(string name) : base(name)
+        {
+        }
+
+        public abstract event GradeAddedDelegate GradeAdded;
+
+        //an abstract method is a way of allowing derived classes to inherit the method without actually knowing what it does..
+        //so the child classes would implement and define what the method is doing
+        public abstract void AddGrade(double grade);
+
+        public abstract Statistics GetStatistics()
+        {
+            throw new NotImplementedException();
+        }
+    }
+
+
+    //InMemoryBook is inherited from Book    
+    public class InMemoryBook : Book
     {
         //public is an access modifier, it means whether or not the field definition(var) or Method can be accessed from outside the Class
 
-        public Book(string name)
+        //constructor method, so name is required;        
+        public InMemoryBook(string name) : base(name)
         {
-            //constructor method;
             //must have same name as class, and cannot have a return type
             //grades = new List<double>(){25.2, 10.7, 22.3, 87.4};  
 
@@ -21,7 +77,8 @@ namespace GradeBook
 
         }
 
-        public void AddGrade(double grade)
+        //override, this overrides whatever the base class is providing (as this method is an abstract method on the base class)
+        public override void AddGrade(double grade)
         {
                 
             if(grade <= 100 && grade >= 0){                
@@ -36,7 +93,7 @@ namespace GradeBook
         }
 
 
-        public event GradeAddedDelegate GradeAdded;
+        public override event GradeAddedDelegate GradeAdded;
 
 
         public void ShowStatistics(){
@@ -47,7 +104,9 @@ namespace GradeBook
             System.Console.WriteLine($"Average: {result.Average:N1}");
         }
 
-        public Statistics GetStatistics(){
+        //InMemoryBook is defining this method below, but it's also inheriting the same method name from the interface IBook, so use override 
+        //as we do for override
+        public override Statistics GetStatistics(){
             var stats = new Statistics();
 
             stats.Average = this.GetAverage(this.grades);
@@ -111,6 +170,7 @@ namespace GradeBook
             //private set;
         }
 
+        /*
          public string Name
          {
              get
@@ -127,7 +187,8 @@ namespace GradeBook
                 
              }
          }
-         
+        */ 
+
         //backing field 
         private string name;    
 

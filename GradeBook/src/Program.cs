@@ -5,37 +5,49 @@ namespace GradeBook
 {
     class Program
     {
-        static void Main(string[] args) 
+        static void Main(string[] args)
         {
-            
-            var book = new Book("testo");            
-            book.GradeAdded += OnGradeAdded;
-            book.GradeAdded += OnGradeAdded;
+
+            IBook book = new DiskBook("Sctott's Grade Book");
+
             book.GradeAdded += OnGradeAdded;
 
-            var done = false;
+            EnterGrades(book);
 
-            while(!done)
+            var stats = book.GetStatistics();
+
+            book.Name = "";
+            System.Console.WriteLine($"For the book named: {book.Name}");
+            System.Console.WriteLine($"Low: {stats.Low}");
+            System.Console.WriteLine($"High: {stats.High}");
+            System.Console.WriteLine($"Average: {stats.Average:N1}");
+
+        }
+
+        private static void EnterGrades(IBook book)
+        {
+            while (true)
             {
                 Console.WriteLine("Enter a grade or enter 'q' to quit");
-                var input = Console.ReadLine();    
+                var input = Console.ReadLine();
 
-                if(input == "q"){
-                    done = true;
-                    break;
+                if (input == "q")
+                {
+                    break;                    
                 }
 
-                try 
-                {                                      
+                try
+                {
                     var grade = double.Parse(input);
                     book.AddGrade(grade);
                 }
                 //catch exceptions
-                catch(ArgumentException ex)
-                {                      
+                catch (ArgumentException ex)
+                {
                     Console.WriteLine(ex.Message);
                 }
-                catch(FormatException ex){
+                catch (FormatException ex)
+                {
                     Console.WriteLine(ex.Message);
                 }
                 finally
@@ -44,18 +56,8 @@ namespace GradeBook
                     //useful if you need to close a file or close a network socket
                     System.Console.WriteLine("**");
                 }
-                
+
             }
-
-            var stats = book.GetStatistics();
-
-            
-            book.Name = "";
-            System.Console.WriteLine($"For the book named: {book.Name}");
-            System.Console.WriteLine($"Low: {stats.Low}");
-            System.Console.WriteLine($"High: {stats.High}");
-            System.Console.WriteLine($"Average: {stats.Average:N1}");
-
         }
 
         static void OnGradeAdded(object sender, EventArgs e)

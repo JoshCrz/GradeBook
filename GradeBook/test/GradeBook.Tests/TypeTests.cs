@@ -30,7 +30,7 @@ namespace GradeBook.Tests
         public void TestAddGrade(){
             //arrange 
             //act
-            var book = new Book("My book");
+            var book = new InMemoryBook("My book");
             book.AddGrade(105);
 
             System.Console.WriteLine(book.value);            
@@ -66,8 +66,8 @@ namespace GradeBook.Tests
             return 3;
         }
 
-        void GetBookSetName(ref Book book, string name){
-            book = new Book(name);            
+        void GetBookSetName(ref InMemoryBook book, string name){
+            book = new InMemoryBook(name);            
             book.Name = name;
         }
 
@@ -83,8 +83,8 @@ namespace GradeBook.Tests
         }
         
 
-        void GetBookSetName(Book book, string name){
-            book = new Book(name);            
+        void GetBookSetName(InMemoryBook book, string name){
+            book = new InMemoryBook(name);            
             book.Name = name;
         }
 
@@ -100,7 +100,7 @@ namespace GradeBook.Tests
         }
         
 
-        void SetName(Book book, string name){
+        void SetName(InMemoryBook book, string name){
             book.Name = name;
         }
 
@@ -147,8 +147,8 @@ namespace GradeBook.Tests
         }
 
 
-        Book GetBook(string name){
-            return new Book(name);            
+        InMemoryBook GetBook(string name){
+            return new InMemoryBook(name);            
         }
 
     }
