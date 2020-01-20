@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.IO;
 
 namespace GradeBook
 {
@@ -11,7 +12,30 @@ namespace GradeBook
     {
         public DiskBook(string name) : base(name)
         {
+            
+        }
 
+        public override event GradeAddedDelegate GradeAdded;
+
+        public override void AddGrade(double grade)
+        {
+         //challenge, open file witgh same name, writre new linbe into the file with grade value
+         //using will automatically clean up at runtime
+         using (var writer = File.AppendText($"{Name}.txt")){
+            writer.WriteLine(grade);
+            if(GradeAdded != null){
+                GradeAdded(this, new EventArgs());
+            }
+            //writer.Dispose();     this now automatically happens due to the 'using';
+         }         
+        }
+        public override Statistics GetStatistics()
+        {
+            throw new NotImplementedException();
+        }
+        public override string ToString()
+        {
+            return base.ToString();
         }
     }
 
@@ -49,15 +73,10 @@ namespace GradeBook
         }
 
         public abstract event GradeAddedDelegate GradeAdded;
-
         //an abstract method is a way of allowing derived classes to inherit the method without actually knowing what it does..
         //so the child classes would implement and define what the method is doing
         public abstract void AddGrade(double grade);
-
-        public abstract Statistics GetStatistics()
-        {
-            throw new NotImplementedException();
-        }
+        public abstract Statistics GetStatistics();       
     }
 
 

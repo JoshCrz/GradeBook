@@ -8,7 +8,7 @@ namespace GradeBook
         static void Main(string[] args)
         {
 
-            IBook book = new DiskBook("Sctott's Grade Book");
+            IBook book = new DiskBook("Scott's Grade Book");
 
             book.GradeAdded += OnGradeAdded;
 
@@ -16,7 +16,7 @@ namespace GradeBook
 
             var stats = book.GetStatistics();
 
-            book.Name = "";
+            //book.Name = "";
             System.Console.WriteLine($"For the book named: {book.Name}");
             System.Console.WriteLine($"Low: {stats.Low}");
             System.Console.WriteLine($"High: {stats.High}");
